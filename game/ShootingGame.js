@@ -153,7 +153,7 @@ function updateGameArea() {
             if (bullet[i].x == player.x && bullet[i].y > player.y+24 && bullet[i].y < player.y+88 ) {
                 document.getElementById("result").innerHTML = "gun win!!!"
             }
-            if (GameTime == 0 || bullet.length = 20) {
+            if (GameTime == 0) {
                 document.getElementById("result").innerHTML = "human win!!!"
             }
         }
