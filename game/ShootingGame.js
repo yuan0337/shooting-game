@@ -4,25 +4,21 @@ var bullet = [];
 var player;
 var time = 0;
 var GameTime;
-var background;
-var shootIntervals;
 
-//var a;
-//var b;
+
 function startGame() {
     myGameArea.start();
     
-    gun = new component(100, 100, "gun.png", 5, 255,"image");   //x max: 930    y max:510
-    player = new component(150, 150, "player.png", 800, 200, "image");   //top: +42      bottom: +104
+    gun = new component(100, 100, "gun.png", 5, 255,"image");   
+    player = new component(150, 150, "player.png", 800, 200, "image");  
     window.addEventListener("keydown", function(e) {
     if(e.code == "Space" ) {
         bullet.push(new component(40, 40, "bullet.png", gun.x + 100, gun.y + 5,"image"));
-        bullet[bullet.length - 1].speedX = 5;  //center: -20
+        bullet[bullet.length - 1].speedX = 8;  
     }
     })
    
-    //a = new component(10, 10, "red", 0, 0,);
-    //b = new component(40, 40, "bullet.png",  100,  5,"image")
+    
     document.getElementById("score").innerHTML = "your score: " + score;
 }
 
@@ -98,9 +94,6 @@ var myGameArea = {
     stop : function() {
         clearInterval(this.interval);
     },
-    //endInterval : setInterval(() => {
-    //    myGameArea.stop();
-    //  }, 60000)
     
     
     
@@ -152,15 +145,8 @@ function updateGameArea() {
         player.update();
         player.speedX = 0;
         player.speedY = 0;
-        /*a.newPos();
-        a.update();
-        a.speedX = 0;
-        a.speedY = 0;
-        b.newPos();
-        b.update();
-        b.speedX = 0;
-        b.speedY = 0;*/
-        for(i = 0; i < bullet.length; i++) {
+        
+    for(i = 0; i < bullet.length; i++) {
             bullet[i].update();
             bullet[i].newPos();
             if (bullet[i].x > 930 && bullet[i].x < 940 && player.x > 500 && player.x <= 800)  {
@@ -176,7 +162,7 @@ function updateGameArea() {
                 score+=3;
                 document.getElementById("score").innerHTML = "your score: " + score;
             } 
-            if (bullet[i].x <= player.x + 43 && bullet[i].x >= player.x + 37 && bullet[i].y > player.y+24 && bullet[i].y < player.y+88 ) {
+            if (bullet[i].x <= player.x + 44 && bullet[i].x >= player.x + 36 && bullet[i].y > player.y+24 && bullet[i].y < player.y+88 ) {
                 document.getElementById("result").innerHTML = "gun win!!!"
                 myGameArea.stop();
             }
@@ -185,14 +171,14 @@ function updateGameArea() {
         }
         time++;
         GameTime = 60-(time-time%100)/100;
-        //console.log(time);
+        document.getElementById("time").innerHTML = "time: " + GameTime;    
         
         if (time == 6000 || score >= 20 ) {
             document.getElementById("result").innerHTML = "human win!!!"
             myGameArea.stop();
         }
         
-        document.getElementById("time").innerHTML = "time: " + GameTime;
+
         if (myGameArea.ArrowUpKey) {
             if(player.y <= -26){
                 player.speedY = 0;
@@ -200,7 +186,7 @@ function updateGameArea() {
             else{
                 player.speedY = -2;
             }
-        }//a.speedY = -1
+        }
         if (myGameArea.ArrowDownKey) {
             if(player.y >= 400) {
                 player.speedY = 0;
@@ -208,7 +194,7 @@ function updateGameArea() {
             else{
                 player.speedY = 2;
             }
-        }//a.speedY = 1
+        }
         if (myGameArea.ArrowRightKey) {
             if(player.x >= 800) {
                 player.speedX = 0;
@@ -216,7 +202,7 @@ function updateGameArea() {
             else {
                 player.speedX = 2;
             }
-        }//a.speedX = 1
+        }
         if (myGameArea.ArrowLeftKey) {
             if(player.x <= 100) {
                 player.speedX = 0;
@@ -224,7 +210,7 @@ function updateGameArea() {
             else {
                 player.speedX = -2;
             }
-        }//a.speedX = -1
+        }
         if (myGameArea.KeyW) {
             if(gun.y <= 3) {
                 gun.speedY = 0;
@@ -247,19 +233,4 @@ function updateGameArea() {
             
         
     }
-    if (time == 6000) {
-        document.getElementById("result").innerHTML = "human win!!!";
-        
-    }
-   
-
-
-
-function moveup(){
-    gun.speedY --;
-}
-
-
-function movedown(){
-    gun.speedY ++;
-}
+    
