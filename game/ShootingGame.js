@@ -184,7 +184,7 @@ function updateGameArea() {
                 player.speedY = 0;
             }
             else{
-                player.speedY = -2;
+                player.speedY = -3;
             }
         }
         if (myGameArea.ArrowDownKey) {
@@ -192,7 +192,7 @@ function updateGameArea() {
                 player.speedY = 0;
             }
             else{
-                player.speedY = 2;
+                player.speedY = 3;
             }
         }
         if (myGameArea.ArrowRightKey) {
@@ -200,7 +200,7 @@ function updateGameArea() {
                 player.speedX = 0;
             }
             else {
-                player.speedX = 2;
+                player.speedX = 3;
             }
         }
         if (myGameArea.ArrowLeftKey) {
@@ -208,7 +208,7 @@ function updateGameArea() {
                 player.speedX = 0;
             }
             else {
-                player.speedX = -2;
+                player.speedX = -3;
             }
         }
         if (myGameArea.KeyW) {
