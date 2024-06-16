@@ -11,14 +11,7 @@ function startGame() {
     
     gun = new component(100, 100, "gun.png", 5, 255,"image");   
     player = new component(150, 150, "player.png", 800, 200, "image");  
-    window.addEventListener("keydown", function(e) {
-    if(e.code == "Space" ) {
-        bullet.push(new component(40, 40, "bullet.png", gun.x + 100, gun.y + 5,"image"));
-        bullet[bullet.length - 1].speedX = 8;  
-    }
-    })
    
-    
     document.getElementById("score").innerHTML = "your score: " + score;
 }
 
@@ -227,7 +220,15 @@ function updateGameArea() {
                 gun.speedY = 2;
             }
         }
-        
+        if(myGameArea.SpaceKey && myGameArea.canshoot) {
+            bullet.push(new component(40, 40, "bullet.png", gun.x + 100, gun.y + 5,"image"));
+            bullet[bullet.length - 1].speedX = 8;
+            myGameArea.canshoot = false;
+            var myInterval = setInterval(() => {
+                myGameArea.canshoot = true;
+                cleanInterval(myInterval);
+            , 300})
+        }
         
             
             
