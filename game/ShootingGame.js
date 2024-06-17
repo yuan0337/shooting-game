@@ -163,7 +163,7 @@ function updateGameArea() {
                 score+=2;
                 document.getElementById("score").innerHTML = "your score: " + score;
             }
-            else if (bullet[i].x > 930 && bullet[i].x < 940 && player.x >= 100 && player.x <= 300) {
+            else if (bullet[i].x > 930 && bullet[i].x < 940 && player.x >= 98 && player.x <= 300) {
                 score+=3;
                 document.getElementById("score").innerHTML = "your score: " + score;
             } 
