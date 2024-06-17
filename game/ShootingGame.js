@@ -105,7 +105,7 @@ var myGameArea = {
     
 }
 function component(width, height, color, x, y, type) {
-    this.type = type
+    this.type = type;
     if (type == "image" ){
         this.image = new Image();
         this.image.src = color;
@@ -168,7 +168,7 @@ function updateGameArea() {
                 document.getElementById("score").innerHTML = "your score: " + score;
             } 
             if (bullet[i].x <= player.x + 44 && bullet[i].x >= player.x + 36 && bullet[i].y > player.y+24 && bullet[i].y < player.y+88 ) {
-                document.getElementById("result").innerHTML = "gun win!!!"
+                document.getElementById("result").innerHTML = "gun win!!!";
                 myGameArea.stop();
             }
             
@@ -179,7 +179,7 @@ function updateGameArea() {
         document.getElementById("time").innerHTML = "time: " + GameTime;    
         
         if (time == 3000 || score >= 20 ) {
-            document.getElementById("result").innerHTML = "human win!!!"
+            document.getElementById("result").innerHTML = "human win!!!";
             myGameArea.stop();
         }
         
@@ -233,7 +233,7 @@ function updateGameArea() {
             }
         }
         if (time >= canShootTime) {
-            canshoot = true
+            canshoot = true;
         }
         
             
