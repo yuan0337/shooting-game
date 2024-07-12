@@ -7,7 +7,7 @@ var GameTime;
 var canShootTime;
 var canshoot = true;     //定義變數
 
-function startGame() {        //讓遊戲開使的函式
+function startGame() {        //讓遊戲開始的函式
     myGameArea.start();
     
     gun = new component(100, 100, "gun.png", 5, 255,"image");   //建立槍
