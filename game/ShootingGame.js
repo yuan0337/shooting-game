@@ -1,41 +1,33 @@
 var gun;
 var bullet = [];
 var player;      
-var score=0;
+var score = 0;
 var time = 0;
-var GameTime;
+var GameTime = 30;
 var canShootTime;
-var canshoot = false;     //定義變數
+var canshoot = false;
 var canMove = false;
 
 function startGame() {
-    var score=0;
-    var time = 0;
-    canshoot = true;
-    canMove = true;
-    
+    if(canMove == false){
+        score = 0;       
+        time = 0;        
+        GameTime = 30;
+        bullet = [];     
+        canshoot = true;
+        canMove = true;
+        document.getElementById("result").innerHTML = "";  // 清除勝負結果
+        refreshGame();
+    }
 }
 
-function refreshGame() {        //讓遊戲開始的函式
-
-    
+function refreshGame() {
     myGameArea.start();
     
-    gun = new component(100, 100, "gun.png", 5, 255,"image");   //建立槍
-    player = new component(150, 150, "player.png", 800, 200, "image");  //建立玩家
-    window.addEventListener("keydown", function(e) {
-    if(e.code == "Space" && canshoot) {       //判斷是否可以發射子彈
-        bullet.push(new component(40, 40, "bullet.png", gun.x + 100, gun.y + 5,"image"));   //建立子彈
-        bullet[bullet.length - 1].speedX = 8;   //設定子彈的速度
-        canshoot = false;
-        canShootTime = time + 30;     //設定每槍至少間隔0.3秒才能射擊
-        
-    }
+    gun = new component(100, 100, "gun.png", 5, 255, "image");
+    player = new component(150, 150, "player.png", 800, 200, "image");
     
-    })
-   
-    
-    document.getElementById("score").innerHTML = "your score: " + score;   //顯示分數
+    document.getElementById("score").innerHTML = "your score: " + score;
 }
 
 var myGameArea = {    //定義遊戲區域
@@ -54,61 +46,26 @@ var myGameArea = {    //定義遊戲區域
         this.canvas.height = 540;
         this.context = this.canvas.getContext("2d");
         
-        document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+        var oldWrapper = document.getElementById("gamearea");
+        if (oldWrapper) {
+            oldWrapper.remove();
+            }
+        var wrapper = document.createElement("div");
+        wrapper.id = "gamearea";
+        // 在 div 裡放入 canvas
+        wrapper.appendChild(this.canvas);
+
+        document.body.insertBefore(wrapper, document.body.childNodes[0]);
         this.frameNo = 0;
+        clearInterval(this.interval); 
         this.interval = setInterval(updateGameArea, 10);   //設定canvas
-        window.addEventListener('keydown', function (e) {  //判斷按下鍵盤時的按鍵
-            if(e.code == "ArrowUp" && canMove == true) {
-                myGameArea.ArrowUpKey = true;
-            }
-            if(e.code == "ArrowDown" && canMove == true) {
-                myGameArea.ArrowDownKey = true;
-            }
-            if(e.code == "ArrowLeft" && canMove == true) {
-                myGameArea.ArrowLeftKey = true;
-            }
-            if(e.code == "ArrowRight" && canMove == true) {
-                myGameArea.ArrowRightKey = true;
-            }
-            if(e.code == "KeyW" && canMove == true) {
-                myGameArea.KeyW = true;
-            }
-            if(e.code == "KeyS" && canMove == true) {
-                myGameArea.KeyS= true;
-            }
-            if(e.code == "Space" && canMove == true) {
-                myGameArea.SpaceKey = true;
-            }
-        })
-        window.addEventListener('keyup', function (e) {    //判斷放開的按鍵
-            if(e.code == "ArrowUp") {
-                myGameArea.ArrowUpKey = false;
-            }
-            if(e.code == "ArrowDown") {
-                myGameArea.ArrowDownKey = false;
-            }
-            if(e.code == "ArrowLeft") {
-                myGameArea.ArrowLeftKey = false;
-            }
-            if(e.code == "ArrowRight") {
-                myGameArea.ArrowRightKey = false;
-            }
-            if(e.code == "KeyW") {
-                myGameArea.KeyW = false;
-            }
-            if(e.code == "KeyS") {
-                myGameArea.KeyS= false;
-            }
-            if(e.code == "Space") {
-                myGameArea.SpaceKey = false;
-            }
-        })
-    }, 
+    },
     clear : function() {    //由於canvas是一張畫布，所以要做出動態效果就必須不斷更新畫布
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     },
     stop : function() {   //遊戲結束的函式
         clearInterval(this.interval);
+        canMove = false;
     },
     
     
@@ -253,4 +210,82 @@ function updateGameArea() {   //更新畫布
             
         
     }
+
+window.addEventListener("keydown", function(e) {
+    if(e.code == "Space" && canshoot) {
+        bullet.push(new component(40, 40, "bullet.png", gun.x + 100, gun.y + 5,"image"));
+        bullet[bullet.length - 1].speedX = 8;
+        canshoot = false;
+        canShootTime = time + 30;
+    }
+});
+
+window.addEventListener('keydown', function (e) {  //判斷按下鍵盤時的按鍵
+if(e.code == "ArrowUp" && canMove == true) {
+    myGameArea.ArrowUpKey = true;
+}
+if(e.code == "ArrowDown" && canMove == true) {
+    myGameArea.ArrowDownKey = true;
+}
+if(e.code == "ArrowLeft" && canMove == true) {
+    myGameArea.ArrowLeftKey = true;
+}
+if(e.code == "ArrowRight" && canMove == true) {
+    myGameArea.ArrowRightKey = true;
+}
+if(e.code == "KeyW" && canMove == true) {
+    myGameArea.KeyW = true;
+}
+if(e.code == "KeyS" && canMove == true) {
+    myGameArea.KeyS= true;
+}
+if(e.code == "Space" && canMove == true) {
+    myGameArea.SpaceKey = true;
+}
+})
+window.addEventListener('keyup', function (e) {    //判斷放開的按鍵
+if(e.code == "ArrowUp") {
+    myGameArea.ArrowUpKey = false;
+}
+if(e.code == "ArrowDown") {
+    myGameArea.ArrowDownKey = false;
+}
+if(e.code == "ArrowLeft") {
+    myGameArea.ArrowLeftKey = false;
+}
+if(e.code == "ArrowRight") {
+    myGameArea.ArrowRightKey = false;
+}
+if(e.code == "KeyW") {
+    myGameArea.KeyW = false;
+}
+if(e.code == "KeyS") {
+    myGameArea.KeyS= false;
+}
+if(e.code == "Space") {
+    myGameArea.SpaceKey = false;
+}
+})
+
+window.addEventListener("load", function() {
+    myGameArea.start();
+    clearInterval(myGameArea.interval);  // 先停止 interval
     
+    gun = new component(100, 100, "gun.png", 5, 255, "image");
+    player = new component(150, 150, "player.png", 800, 200, "image");
+    document.getElementById("score").innerHTML = "your score: 0";
+    document.getElementById("time").innerHTML = "time: 30";
+    
+    var loaded = 0;
+    function tryDraw() {
+        loaded++;
+        if(loaded == 2) {
+            myGameArea.clear();
+            gun.update();
+            player.update();
+        }
+    }
+    
+    gun.image.onload = tryDraw;
+    player.image.onload = tryDraw;
+});
