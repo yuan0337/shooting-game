@@ -4,10 +4,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta charset="utf-8"/>
         <link rel="stylesheet" type="text/css" href="ShootingGame.css"/>
+        <script src="ShootingGame.js" defer></script>
         <title>shooting game</title>
     </head>
-    <script src="ShootingGame.js"></script>
-    <body onload="refreshGame()">
+    <body>
     <br/>
     <div class="text">
         <div id="score" class="information"></div>
@@ -17,6 +17,6 @@
     <div class="text">
         <div id="result" class="information"></div>
     </div>
-    <input type="button" onclick="startGame()" value="開始遊戲"/>
+    <input type="button" onclick="startGame(); this.blur();" value="開始遊戲"/>
     </body>
 </html>
