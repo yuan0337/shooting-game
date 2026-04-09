@@ -9,12 +9,16 @@ var canshoot = false;     //定義變數
 var canMove = false;
 
 function startGame() {
+    var score=0;
+    var time = 0;
     canshoot = true;
     canMove = true;
     
 }
 
 function refreshGame() {        //讓遊戲開始的函式
+
+    
     myGameArea.start();
     
     gun = new component(100, 100, "gun.png", 5, 255,"image");   //建立槍
@@ -181,8 +185,10 @@ function updateGameArea() {   //更新畫布
             
             
         }
-        time++;     //此canvas的更新頻率為100Hz因此更新一次為10ms
-        GameTime = 30-(time-time%100)/100;    //計算遊戲時間
+        if(canMove) {
+            time++;     //此canvas的更新頻率為100Hz因此更新一次為10ms
+            GameTime = 30-(time-time%100)/100;    //計算遊戲時間
+        }
         document.getElementById("time").innerHTML = "time: " + GameTime;    //顯示遊戲時間
         
         if (time == 3000 || score >= 20 ) {    //判斷人獲勝的情況
