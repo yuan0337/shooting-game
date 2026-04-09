@@ -5,9 +5,16 @@ var score=0;
 var time = 0;
 var GameTime;
 var canShootTime;
-var canshoot = true;     //定義變數
+var canshoot = false;     //定義變數
+var canMove = false;
 
-function startGame() {        //讓遊戲開始的函式
+function startGame() {
+    canshoot = true;
+    canMove = true;
+    
+}
+
+function refreshGame() {        //讓遊戲開始的函式
     myGameArea.start();
     
     gun = new component(100, 100, "gun.png", 5, 255,"image");   //建立槍
@@ -47,25 +54,25 @@ var myGameArea = {    //定義遊戲區域
         this.frameNo = 0;
         this.interval = setInterval(updateGameArea, 10);   //設定canvas
         window.addEventListener('keydown', function (e) {  //判斷按下鍵盤時的按鍵
-            if(e.code == "ArrowUp") {
+            if(e.code == "ArrowUp" && canMove == true) {
                 myGameArea.ArrowUpKey = true;
             }
-            if(e.code == "ArrowDown") {
+            if(e.code == "ArrowDown" && canMove == true) {
                 myGameArea.ArrowDownKey = true;
             }
-            if(e.code == "ArrowLeft") {
+            if(e.code == "ArrowLeft" && canMove == true) {
                 myGameArea.ArrowLeftKey = true;
             }
-            if(e.code == "ArrowRight") {
+            if(e.code == "ArrowRight" && canMove == true) {
                 myGameArea.ArrowRightKey = true;
             }
-            if(e.code == "KeyW") {
+            if(e.code == "KeyW" && canMove == true) {
                 myGameArea.KeyW = true;
             }
-            if(e.code == "KeyS") {
+            if(e.code == "KeyS" && canMove == true) {
                 myGameArea.KeyS= true;
             }
-            if(e.code == "Space") {
+            if(e.code == "Space" && canMove == true) {
                 myGameArea.SpaceKey = true;
             }
         })
